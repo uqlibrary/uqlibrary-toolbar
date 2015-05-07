@@ -3,5 +3,5 @@ A modern, responsive, and accessible toolbar that provides optional search and m
 
 TODO: Component page 
 
-For now, try running uqlibrary-toolbar-demo.html for a preview containing a left- and right-drawer surrounding the uqlibrary-toolbar which occupies the centre.
+For now, try running demo.html for a preview containing a left- and right-drawer surrounding the uqlibrary-toolbar which occupies the centre.
  (assumes it is running in the same filepath as the other uqlibrary components relative to uqlibrary-elements).

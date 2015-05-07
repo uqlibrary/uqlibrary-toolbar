@@ -6,14 +6,21 @@
   <title>uqlibrary-toolbar demo</title>
 
   <script src="../webcomponentsjs/webcomponents.min.js"></script>
-  <link rel="import" href="uqlibrary-toolbar-demo.html">
+  <link rel="import" href="uqlibrary-toolbar.html">
 
   <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/app.css">
 </head>
-<body unresolved>
+<body fullbleed unresolved>
+  <uqlibrary-toolbar
+          appTitle="Application Name"
+          appTitleLink="#">
+  </uqlibrary-toolbar>
 
-  <h3>uqlibrary-toolbar Demo</h3>
-  <uqlibrary-toolbar-test></uqlibrary-toolbar-test>
+<script>
+    var uqlibraryToolbar = document.querySelector('uqlibrary-toolbar');
+    uqlibraryToolbar.addEventListener('uqlibrary-toolbar-menu-clicked', function() {console.log('menu was clicked!')});
+    uqlibraryToolbar.addEventListener('uqlibrary-toolbar-search-button-clicked', function(e) {console.log('searched for ' + e.detail.searchTerm)});
+</script>
 
 </body>
 </html>

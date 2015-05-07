@@ -52,18 +52,18 @@ In this case only mouse or touch events will be handled, eg if user navigates to
     <!--<polymer-element name="uq-toolbar" attributes="pageTitle appTitle uq-links local-options site-search nav-menu">-->
 
     <template>
-        <core-toolbar>
+        <core-toolbar id="mainToolbar">
 
             <!--Initial toolbar UI which is visible by default-->
             <!--TODO: bubble up this event so the scaffolding can use it-->
             <div class="responsive-menu-icon" id="hamburgerMenuIcon">
                 <paper-icon-button icon="menu"
-                                   on-tap="{{toggleMenuDrawer}}">
+                                   on-tap="{{menuClicked}}">
                 </paper-icon-button>
             </div>
 
             <div flex id="toolbarTitle">
-                <a href="{{appTitleLink}}" class="glow application-name">{{appTitle}}</a>
+                <a href="{{appTitleLink}}" class="glow applicationName">{{appTitle}}</a>
             </div>
 
             <div id="expandSearch" on-tap="{{activateSearch}}">
@@ -74,12 +74,12 @@ In this case only mouse or touch events will be handled, eg if user navigates to
             <div hidden id="backArrow" class="offCanvas" on-tap="{{deactivateSearch}}">
                 <uqlibrary-a11y-link><paper-icon-button icon="arrow-back"></paper-icon-button></uqlibrary-a11y-link>
             </div>
-            <div hidden flex id="left-flex" class="offCanvas">
+            <div hidden flex id="leftFlex" class="offCanvas">
                 <paper-input-decorator label="Search">
-                    <input is="core-input" on-keypress="{{searchKeyPress}}">
+                    <input is="core-input" id="searchInputField" on-keypress="{{searchKeyPress}}">
                 </paper-input-decorator>
             </div>
-            <div hidden id="right-flex" class="offCanvas" on-tap="{{performSearch}}">
+            <div hidden id="rightFlex" class="offCanvas" on-tap="{{searchButtonClicked}}">
                 <uqlibrary-a11y-link><paper-icon-button icon="search" id="searchButton"></paper-icon-button></uqlibrary-a11y-link>
             </div>
 
@@ -97,38 +97,34 @@ In this case only mouse or touch events will be handled, eg if user navigates to
             <!--</template>-->
             <!--</ul>-->
             <!--</div>-->
-            <paper-menu-button id="responsive-menu-icon" hidden?="{{!uqLinks}}">
+            <template if="{{appLinks}}">
+            <paper-menu-button id="responsive-menu-icon">
                 <paper-icon-button icon="more-vert"></paper-icon-button>
                 <paper-dropdown class="dropdown" halign="right">
                     <core-menu class="menu">
-                        <template repeat="{{l in links}}">
+                        <template repeat="{{link in appLinks}}">
                             <uqlibrary-a11y-link>
-                                <paper-item><a href="{{l.url}}">{{l.label}}</a></paper-item>
+                                <paper-item><a href="{{link.url}}">{{link.label}}</a></paper-item>
                             </uqlibrary-a11y-link>
                         </template>
                     </core-menu>
                 </paper-dropdown>
             </paper-menu-button>
+            </template>
         </core-toolbar>
 
-        <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/uqlibrary-toolbar.css">
+        <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
     </template>
     <script>
         Polymer('uqlibrary-toolbar', {
 
             // TODO: uqLinks variable should be set by the uqLinks attribute
-            uqLinks: true,
             animationFrameLength: 150,
 
             ready: function() {
                 // populate the element’s data model
                 // (the UQ Links array)
                 // TODO: data should come from some central location
-                this.links = [
-                    {label: 'Help', url: 'http://www.uq.edu.au/'},
-                    {label: 'About', url: 'http://www.uq.edu.au/contacts/'},
-                    {label: 'Feedback', url: 'http://www.uq.edu.au/study/'}
-                ];
             },
 
             // TODO: loop through a function to do this animation
@@ -137,21 +133,19 @@ In this case only mouse or touch events will be handled, eg if user navigates to
                 var that = this;
 
                 setTimeout(function() {
-                    that.shadowRoot.querySelector('core-toolbar').classList.toggle('turnWhite');
-                    that.shadowRoot.querySelector('#hamburgerMenuIcon').classList.toggle('invisible');
-                    that.shadowRoot.querySelector('#toolbarTitle').classList.toggle('invisible');
-                    that.shadowRoot.querySelector('#expandSearch').classList.toggle('invisible');
-                    that.shadowRoot.querySelector('#responsive-menu-icon').classList.toggle('invisible');
+                    that.$.mainToolbar.classList.toggle('turnWhite');
+                    that.$.hamburgerMenuIcon.classList.toggle('invisible');
+                    that.$.toolbarTitle.classList.toggle('invisible');
+                    that.$.expandSearch.classList.toggle('invisible');
                 }, 0);
 
                 setTimeout(function() {
-                    that.shadowRoot.querySelector('#hamburgerMenuIcon').setAttribute('hidden', true);
-                    that.shadowRoot.querySelector('#toolbarTitle').setAttribute('hidden', true);
-                    that.shadowRoot.querySelector('#expandSearch').setAttribute('hidden', true);
-                    that.shadowRoot.querySelector('#responsive-menu-icon').setAttribute('hidden', true);
-                    that.shadowRoot.querySelector('#backArrow').removeAttribute('hidden');
-                    that.shadowRoot.querySelector('#left-flex').removeAttribute('hidden');
-                    that.shadowRoot.querySelector('#right-flex').removeAttribute('hidden');
+                    that.$.hamburgerMenuIcon.setAttribute('hidden', true);
+                    that.$.toolbarTitle.setAttribute('hidden', true);
+                    that.$.expandSearch.setAttribute('hidden', true);
+                    that.$.backArrow.removeAttribute('hidden');
+                    that.$.leftFlex.removeAttribute('hidden');
+                    that.$.rightFlex.removeAttribute('hidden');
                 }, that.animationFrameLength);
             },
 
@@ -159,22 +153,28 @@ In this case only mouse or touch events will be handled, eg if user navigates to
                 var that = this;
 
                 setTimeout(function() {
-                    that.shadowRoot.querySelector('#hamburgerMenuIcon').removeAttribute('hidden');
-                    that.shadowRoot.querySelector('#toolbarTitle').removeAttribute('hidden');
-                    that.shadowRoot.querySelector('#expandSearch').removeAttribute('hidden');
-                    that.shadowRoot.querySelector('#responsive-menu-icon').removeAttribute('hidden');
-                    that.shadowRoot.querySelector('#backArrow').setAttribute('hidden', true);
-                    that.shadowRoot.querySelector('#left-flex').setAttribute('hidden', true);
-                    that.shadowRoot.querySelector('#right-flex').setAttribute('hidden', true);
+                    that.$.hamburgerMenuIcon.removeAttribute('hidden');
+                    that.$.toolbarTitle.removeAttribute('hidden');
+                    that.$.expandSearch.removeAttribute('hidden');
+                    that.$.backArrow.setAttribute('hidden', true);
+                    that.$.leftFlex.setAttribute('hidden', true);
+                    that.$.rightFlex.setAttribute('hidden', true);
                 }, 0);
 
                 setTimeout(function() {
-                    that.shadowRoot.querySelector('core-toolbar').classList.toggle('turnWhite');
-                    that.shadowRoot.querySelector('#hamburgerMenuIcon').classList.toggle('invisible');
-                    that.shadowRoot.querySelector('#toolbarTitle').classList.toggle('invisible');
-                    that.shadowRoot.querySelector('#expandSearch').classList.toggle('invisible');
-                    that.shadowRoot.querySelector('#responsive-menu-icon').classList.toggle('invisible');
+                    that.$.mainToolbar.classList.toggle('turnWhite');
+                    that.$.hamburgerMenuIcon.classList.toggle('invisible');
+                    that.$.toolbarTitle.classList.toggle('invisible');
+                    that.$.expandSearch.classList.toggle('invisible');
                 }, that.animationFrameLength);
+            },
+
+            menuClicked: function() {
+                this.fire('uqlibrary-toolbar-menu-clicked');
+            },
+
+            searchButtonClicked: function() {
+                this.fire('uqlibrary-toolbar-search-button-clicked', {searchTerm: this.$.searchInputField.value});
             }
         });
     </script>
