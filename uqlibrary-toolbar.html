@@ -146,6 +146,7 @@ In this case only mouse or touch events will be handled, eg if user navigates to
                     that.$.backArrow.removeAttribute('hidden');
                     that.$.leftFlex.removeAttribute('hidden');
                     that.$.rightFlex.removeAttribute('hidden');
+                    that.$.searchInputField.focus();
                 }, that.animationFrameLength);
             },
 
@@ -176,8 +177,8 @@ In this case only mouse or touch events will be handled, eg if user navigates to
             searchButtonClicked: function() {
                 this.fire('uqlibrary-toolbar-search-button-clicked', {searchTerm: this.$.searchInputField.value});
             },
-            searchKeyPressed: function() {
-                this.fire('uqlibrary-toolbar-search-key-pressed', {searchTerm: this.$.searchInputField.value});
+            searchKeyPressed: function(e) {
+                this.fire('uqlibrary-toolbar-search-key-pressed', {searchTerm: this.$.searchInputField.value, keyPressed: e.keyCode});
             }
         });
     </script>
