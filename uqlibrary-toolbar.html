@@ -56,7 +56,7 @@ Can include optional menu options
 
             <!--Initial toolbar UI which is visible by default-->
             <!--TODO: bubble up this event so the scaffolding can use it-->
-            <div class="responsive-menu-icon" id="hamburgerMenuIcon">
+            <div id="hamburgerMenuIcon">
                 <paper-icon-button icon="menu"
                                    on-tap="{{menuClicked}}">
                 </paper-icon-button>
@@ -71,15 +71,15 @@ Can include optional menu options
             </div>
 
             <!--Search UI which is only visible after user clicks 'search'-->
-            <div hidden id="backArrow" class="offCanvas" on-tap="{{deactivateSearch}}">
+            <div hidden id="backArrow" on-tap="{{deactivateSearch}}">
                 <uqlibrary-a11y-link><paper-icon-button icon="arrow-back"></paper-icon-button></uqlibrary-a11y-link>
             </div>
-            <div hidden flex id="leftFlex" class="offCanvas">
+            <div hidden flex id="leftFlex">
                 <paper-input-decorator label="Search">
                     <input is="core-input" id="searchInputField" on-keypress="{{searchKeyPressed}}">
                 </paper-input-decorator>
             </div>
-            <div hidden id="rightFlex" class="offCanvas" on-tap="{{searchButtonClicked}}">
+            <div hidden id="rightFlex" on-tap="{{searchButtonClicked}}">
                 <uqlibrary-a11y-link><paper-icon-button icon="search" id="searchButton"></paper-icon-button></uqlibrary-a11y-link>
             </div>
 
@@ -97,20 +97,22 @@ Can include optional menu options
             <!--</template>-->
             <!--</ul>-->
             <!--</div>-->
-            <template if="{{appLinks}}">
-            <paper-menu-button id="responsive-menu-icon">
-                <paper-icon-button icon="more-vert"></paper-icon-button>
-                <paper-dropdown class="dropdown" halign="right">
-                    <core-menu class="menu">
-                        <template repeat="{{link in appLinks}}">
-                            <uqlibrary-a11y-link>
-                                <paper-item><a href="{{link.url}}">{{link.label}}</a></paper-item>
-                            </uqlibrary-a11y-link>
-                        </template>
-                    </core-menu>
-                </paper-dropdown>
-            </paper-menu-button>
-            </template>
+            <div id="appLinksIcon">
+                <template if="{{appLinks}}">
+                <paper-menu-button>
+                    <paper-icon-button icon="more-vert"></paper-icon-button>
+                    <paper-dropdown class="dropdown" halign="right">
+                        <core-menu class="menu">
+                            <template repeat="{{link in appLinks}}">
+                                <uqlibrary-a11y-link>
+                                    <paper-item><a href="{{link.url}}">{{link.label}}</a></paper-item>
+                                </uqlibrary-a11y-link>
+                            </template>
+                        </core-menu>
+                    </paper-dropdown>
+                </paper-menu-button>
+                </template>
+            </div>
         </core-toolbar>
 
         <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
@@ -141,12 +143,14 @@ Can include optional menu options
                     that.$.hamburgerMenuIcon.classList.toggle('invisible');
                     that.$.toolbarTitle.classList.toggle('invisible');
                     that.$.expandSearch.classList.toggle('invisible');
+                    that.$.appLinksIcon.classList.toggle('invisible');
                 }, 0);
 
                 setTimeout(function() {
                     that.$.hamburgerMenuIcon.setAttribute('hidden', true);
                     that.$.toolbarTitle.setAttribute('hidden', true);
                     that.$.expandSearch.setAttribute('hidden', true);
+                    that.$.appLinksIcon.setAttribute('hidden', true);
                     that.$.backArrow.removeAttribute('hidden');
                     that.$.leftFlex.removeAttribute('hidden');
                     that.$.rightFlex.removeAttribute('hidden');
@@ -161,6 +165,7 @@ Can include optional menu options
                     that.$.hamburgerMenuIcon.removeAttribute('hidden');
                     that.$.toolbarTitle.removeAttribute('hidden');
                     that.$.expandSearch.removeAttribute('hidden');
+                    that.$.appLinksIcon.removeAttribute('hidden');
                     that.$.backArrow.setAttribute('hidden', true);
                     that.$.leftFlex.setAttribute('hidden', true);
                     that.$.rightFlex.setAttribute('hidden', true);
@@ -171,6 +176,7 @@ Can include optional menu options
                     that.$.hamburgerMenuIcon.classList.toggle('invisible');
                     that.$.toolbarTitle.classList.toggle('invisible');
                     that.$.expandSearch.classList.toggle('invisible');
+                    that.$.appLinksIcon.classList.toggle('invisible');
                 }, that.animationFrameLength);
             },
 
