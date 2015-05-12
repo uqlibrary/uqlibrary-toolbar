@@ -48,7 +48,7 @@ Can include optional menu options
 @homepage https://github.com/uqlibrary/uqlibrary-toolbar
 -->
 
-<polymer-element name="uqlibrary-toolbar" attributes="appTitle appTitleLink appLinks">
+<polymer-element name="uqlibrary-toolbar" attributes="appTitle appTitleLink appLinks searchPlaceholderText">
     <!--<polymer-element name="uq-toolbar" attributes="pageTitle appTitle uq-links local-options site-search nav-menu">-->
 
     <template>
@@ -75,7 +75,7 @@ Can include optional menu options
                 <uqlibrary-a11y-link><paper-icon-button icon="arrow-back"></paper-icon-button></uqlibrary-a11y-link>
             </div>
             <div hidden flex id="leftFlex">
-                <paper-input-decorator label="Search">
+                <paper-input-decorator label="{{searchPlaceholderText}}">
                     <input is="core-input" id="searchInputField" on-keypress="{{searchKeyPressed}}">
                 </paper-input-decorator>
             </div>
@@ -125,12 +125,15 @@ Can include optional menu options
 
             ready: function() {
                 console.log(this.appLinks);
+                console.log(this.searchPlaceholderText);
+                if (!this.searchPlaceholderText) {
+                    this.searchPlaceholderText = "Search";
+                }
             },
 
             created: function() {
                 // hint that appLinks is an array
                 this.appLinks = [];
-
             },
 
             // TODO: loop through a function to do this animation
