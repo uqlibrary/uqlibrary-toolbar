@@ -81,7 +81,7 @@ Can include optional menu options
                                 on-keys-pressed="{{onSearchKeys}}"></core-a11y-keys>
 
 
-                <paper-input-decorator label="Search" id="searchFieldWrapper">
+                <paper-input-decorator label="{{searchPlaceholderText}}" id="searchFieldWrapper">
                     <input is="core-input" id="searchInputField" value="{{searchFieldValue}}" on-keyup="{{searchKeyPressed}}">
                 </paper-input-decorator>
 
