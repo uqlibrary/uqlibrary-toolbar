@@ -48,7 +48,7 @@ Can include optional menu options
 @homepage https://github.com/uqlibrary/uqlibrary-toolbar
 -->
 
-<polymer-element name="uqlibrary-toolbar" attributes="appTitle appTitleLink uqLinks">
+<polymer-element name="uqlibrary-toolbar" attributes="appTitle appTitleLink appLinks">
     <!--<polymer-element name="uq-toolbar" attributes="pageTitle appTitle uq-links local-options site-search nav-menu">-->
 
     <template>
@@ -122,9 +122,13 @@ Can include optional menu options
             animationFrameLength: 150,
 
             ready: function() {
-                // populate the element’s data model
-                // (the UQ Links array)
-                // TODO: data should come from some central location
+                console.log(this.appLinks);
+            },
+
+            created: function() {
+                // hint that appLinks is an array
+                this.appLinks = [];
+
             },
 
             // TODO: loop through a function to do this animation
