@@ -301,6 +301,7 @@ Can include optional menu options
                     this.skipValueChangeHandle = true;
                     this.searchFieldValue = suggestion.text;
                     this.search();
+                    this.$.autosuggest.opened = false;
                 }
 
             },
@@ -319,6 +320,11 @@ Can include optional menu options
                         this.$.autosuggest.opened = false;
                     }
                 }, 100);
+            },
+
+            clearSearchForm: function() {
+              this.skipValueChangeHandle = true;
+              this.searchFieldValue = '';
             }
 
         });
