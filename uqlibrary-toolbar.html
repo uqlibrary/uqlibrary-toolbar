@@ -244,12 +244,7 @@ Can include optional menu options
       search: function (data) {
 
         if (data && data.searchItem) {
-          if (data.searchItem.hasOwnProperty('url')) {
-            window.location.href = data.searchItem.url;
-            this.suggestions = [];
-          } else {
-            this.fire('uqlibrary-toolbar-search-submitted', {searchItem: data.searchItem, searchTerm: data.searchItem.text});
-          }
+          this.fire('uqlibrary-toolbar-search-submitted', {searchItem: data.searchItem, searchTerm: data.searchItem.text});
         }
         else {
           this.fire('uqlibrary-toolbar-search-submitted', {searchTerm: this.searchFieldValue});
