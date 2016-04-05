@@ -1,0 +1,80 @@
+<link rel="import" href="elements.html">
+
+<dom-module id="uqlibrary-toolbar">
+  <style>
+    :host {
+      @apply(--layout-horizontal);
+    }
+
+    #mainToolbar {
+      @apply(--layout-flex);
+    }
+
+    uqlibrary-search-input {
+      @apply(--layout-flex);
+    }
+
+    #suggestionSelector paper-item > div {
+      @apply(--layout-flex);
+    }
+
+    .applicationName {
+      color: white;
+      text-decoration: none;
+    }
+
+    .activeSearch {
+      background-color: white;
+      color: black;
+    }
+  </style>
+  <template>
+    <paper-toolbar id="mainToolbar" class="searchElement">
+      <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="menuClicked" class="hideSearch"></paper-icon-button>
+
+      <paper-icon-button icon="arrow-back" id="backArrow" on-tap="goBack" class="hideSearch" hidden$="{{_emptyValue(appBackUrl)}}"></paper-icon-button>
+
+      <span class="title hideSearch">
+        <a class="applicationName" href$="{{appTitleLink}}">{{appTitle}}</a>
+      </span>
+
+      <paper-icon-button icon="close" id="closeButton" on-tap="deactivateSearch"
+                         class="showSearch searchElement"></paper-icon-button>
+
+      <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="search"></iron-a11y-keys>
+      <uqlibrary-search-input id="searchField" label="{{searchPlaceholderText}}" value="{{searchFieldValue}}" class="showSearch searchElement"></uqlibrary-search-input>
+
+      <div class="offCanvas">
+        <iron-dropdown id="autosuggest" opened="{{openSuggestions}}" class="no-padding"
+                       position-target="{{_getSearchFieldWrapper()}}" autofocusdisabled="true">
+          <iron-selector id="suggestionSelector" selected="{{suggestionIndex}}">
+            <template is="dom-repeat" items="{{suggestions}}" as="item" index-as="idx">
+              <paper-item>
+                <div class="truncate">{{item.text}}</div>
+              </paper-item>
+            </template>
+          </iron-selector>
+        </iron-dropdown>
+      </div>
+
+      <paper-icon-button on-tap="search" icon="search" id="searchButton"></paper-icon-button>
+
+      <template is="dom-if" if="{{_hasAppLinks(appLinks)}}">
+        <div id="appLinksIcon" class="hideSearch">
+          <paper-menu-button horizontal-align="right" vertical-align="below">
+            <paper-icon-button icon="more-vert" class="dropdown-trigger" alt="Options Menu"></paper-icon-button>
+            <paper-menu class="dropdown-content">
+              <template is="dom-repeat" items="{{appLinks}}" as="link">
+                <paper-item>
+                  <a on-tap="linkClicked" href$="{{link.url}}" data-title$="{{link.label}}">{{link.label}}</a>
+                </paper-item>
+              </template>
+            </paper-menu>
+          </paper-menu-button>
+        </div>
+      </template>
+
+    </paper-toolbar>
+  </template>
+  <script src="uqlibrary-toolbar.js"></script>
+</dom-module>

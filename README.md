@@ -1,7 +1,22 @@
 # uqlibrary-toolbar
-A modern, responsive, and accessible toolbar that provides optional search and menu functionality
 
-TODO: Component page 
+uqlibrary-toolbar displays a toolbar which takes an initialisation state, most fundamentally a title, but also 
+including search and a back event
 
-For now, try running demo.html for a preview containing a left- and right-drawer surrounding the uqlibrary-toolbar which occupies the centre.
- (assumes it is running in the same filepath as the other uqlibrary components relative to uqlibrary-elements).
+Example of full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-toolbar).
+
+### Getting Started
+```sh
+npm install && bower install
+```
+
+### Developing
+- Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/). 
+- Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
+- GitHub pages should be updated after every commit to Master by running the "generate-gh-pages.sh" in the /bin/ directory
+
+### Testing
+Tests are run using the Web Component Tester. Either navigate to /tests/index.html in a browser or using the command line:
+```sh
+wct --local all
+```

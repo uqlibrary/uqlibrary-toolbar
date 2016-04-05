@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>uqlibrary-toolbar</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="../elements/uqlibrary-toolbar.html">
+</head>
+<body class="fullbleed">
+
+<uqlibrary-toolbar
+    app-title='Application Name'
+    app-back-url="http://slashdot.org"
+    app-title-link='#'
+    app-links='[{"label": "Switch back", "action": "#"}, {"label": "Help", "url": "#"}, {"label": "Feedback", "url": "#"}]'
+    search-placeholder-text="Search for something"></uqlibrary-toolbar>
+
+<div id="log"></div>
+
+<script>
+  (function () {
+    document.cookie = "UQLMockData=enabled";
+    document.cookie = "UQLMockData-PType=1";
+
+    var uqlibraryToolbar = document.querySelector('uqlibrary-toolbar');
+    var divLog = document.querySelector('#log');
+
+    uqlibraryToolbar.addEventListener('uqlibrary-toolbar-menu-clicked', function () {
+      console.log('menu was clicked')
+      divLog.innerHTML += 'menu was clicked <br>';
+    });
+
+    uqlibraryToolbar.addEventListener('uqlibrary-toolbar-back-clicked', function (e) {
+      var msg = 'back was clicked with value ' + e.detail;
+      console.log(msg)
+      divLog.innerHTML += msg + '<br>';
+    });
+
+    uqlibraryToolbar.addEventListener('uqlibrary-toolbar-search-submitted', function (e) {
+      console.log('submitted term: ' + e.detail.searchTerm);
+      divLog.innerHTML += 'submitted term: ' + e.detail.searchTerm + "<br>";
+
+      if (e.detail.searchItem) {
+        console.log('submitted item: ' + e.detail.searchItem.value);
+        divLog.innerHTML += 'submitted item: ' + e.detail.searchItem.value + "<br>";
+      }
+    });
+
+    var toolbar = document.querySelector('uqlibrary-toolbar');
+
+    toolbar.addEventListener('uqlibrary-toolbar-search-value-changed', function (e) {
+      if (e.detail.value.length > 2) {
+        var suggestions = [];
+
+        for (var i = 0; i < 10 - e.detail.value.length; i++) {
+          var item = {text: e.detail.value + " " + i, value: "00" + i};
+          suggestions.push(item);
+        }
+
+        uqlibraryToolbar.suggestions = suggestions;
+      }
+    });
+  })();
+</script>
+</body>
+</html>
