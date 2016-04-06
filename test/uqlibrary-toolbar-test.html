@@ -37,30 +37,30 @@
       expect(element).not.to.be.null;
     });
 
-    /*
     test('should display toolbar icon buttons', function () {
       // menu icon
-      var menuIcon = myEl.$.hamburgerMenuIcon.querySelector('paper-icon-button');
+      var menuIcon = element.$.hamburgerMenuIcon.querySelector('paper-icon-button');
       expect(menuIcon).not.to.be.null;
 
       // search icon
-      var searchIcon = myEl.$.rightFlex.querySelector('paper-icon-button');
+      var searchIcon = element.$.rightFlex.querySelector('paper-icon-button');
       expect(searchIcon).not.to.be.null;
 
       // search icon
-      var appLinksIcon = myEl.$.appLinksIcon.querySelector('paper-icon-button');
+      var appLinksIcon = element.$.appLinksIcon.querySelector('paper-icon-button');
       expect(appLinksIcon).not.to.be.null;
 
     });
 
+    /*
     test('should display search input when search button is tapped', function (done) {
-      var searchIcon = myEl.$.expandSearch.querySelector('paper-icon-button');
+      var searchIcon = element.$.expandSearch.querySelector('paper-icon-button');
       searchIcon.fire('tap');
 
 
       // Test search suggestions
       document.addEventListener('uqlibrary-toolbar-search-value-changed', function (e) {
-        myEl.suggestions = [{text: 'suggestion 1'}, {text: 'suggestion 2'},
+        element.suggestions = [{text: 'suggestion 1'}, {text: 'suggestion 2'},
           {text: 'suggestion 3', url: 'http://google.com'}];
       });
 
@@ -71,10 +71,10 @@
       });
 
       setTimeout(function () {
-        myEl.searchFieldValue = 'test';
+        element.searchFieldValue = 'test';
 
         setTimeout(function () {
-          var suggestions = myEl.$.suggestionSelector.querySelectorAll('paper-item');
+          var suggestions = element.$.suggestionSelector.querySelectorAll('paper-item');
           expect(suggestions).to.have.length(3);
 
           suggestions[0].fire('tap');
@@ -96,7 +96,7 @@
       });
 
       setTimeout(function () {
-        var menuIcon = myEl.$.hamburgerMenuIcon.querySelector('paper-icon-button');
+        var menuIcon = element.$.hamburgerMenuIcon.querySelector('paper-icon-button');
         menuIcon.fire('tap');
 
         //check if event has been fired
