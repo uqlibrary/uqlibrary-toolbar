@@ -21,6 +21,10 @@ Polymer({
       value: 'Search...',
       notify: true
     },
+    searchTerm: {
+      type: String,
+      notify: true
+    },
     appBackUrl: {
       type: String,
       value: null
@@ -31,7 +35,8 @@ Polymer({
     suggestions: {
       type: Array,
       value: function () {
-        return [];
+        return [
+        ];
       },
       notify: true,
       observer: 'suggestionsChanged'
@@ -44,9 +49,8 @@ Polymer({
     var that = this;
     // by default search is not active
     this.deactivateSearch();
-    this.$.searchField.addEventListener('value-changed', function (e) {
-      that.searchFieldValueChanged(e.detail.value);
-    });
+    this.addEventListener('keyword-changed', this.searchFieldValueChanged);
+    this.addEventListener('activated', this.autocompleteChosen);
   },
   activateSearch: function () {
     var els = this.querySelectorAll('.hideSearch');
@@ -94,17 +98,16 @@ Polymer({
   goBack: function () {
     this.fire('uqlibrary-toolbar-back-clicked', this.appBackUrl);
   },
-  searchFieldValueChanged: function (value) {
-    this.fire('uqlibrary-toolbar-search-value-changed', {value: value});
+  searchFieldValueChanged: function (evt) {
+    this.searchTerm = evt.detail.value;
+    this.fire('uqlibrary-toolbar-search-value-changed', {value: this.searchTerm});
   },
-  suggestionsChanged: function (newValue, oldValue) {
-    var that = this;
-    //this.$.suggestionSelector.clearSelection();
-    this.set('$.suggestionSelector.selected', null);
-    this.suggestionIndex = -1;
-    this.async(function () {
-      that.openSuggestions = that.suggestions.length > 0;
-    }, 100);
+  autocompleteChosen: function (evt) {
+    this.searchTerm = evt.detail;
+    this.fire('uqlibrary-toolbar-search-submitted', {searchTerm: this.searchTerm});
+  },
+  suggestionsChanged: function (newValue) {
+    this.openSuggestions = this._hasSuggestions(newValue);
   },
   suggestionIndexChanged: function (newValue, oldValue) {
     if (!this.ignoreIndexChanged && this.suggestionIndex != null && this.suggestionIndex >= 0) {
@@ -112,42 +115,16 @@ Polymer({
     }
     this.ignoreIndexChanged = false;
   },
-  onSearchKeys: function (ev) {
-    switch (ev.detail.key) {
-    case 'esc':
-      this.suggestions = [];
-      break;
-    case 'enter':
-      if (this.suggestionIndex >= 0) {
-        this.search({searchItem: this.suggestions[this.suggestionIndex]});
-      }
-      else {
-        this.search();
-      }
-      break;
-    case 'up':
-      this.ignoreIndexChanged = true;
-      this.suggestionIndex = this.suggestionIndex >= 0 ? this.suggestionIndex - 1 : -1;
-      break;
-    case 'down':
-      this.ignoreIndexChanged = true;
-      this.suggestionIndex = this.suggestions.length - 1 > this.suggestionIndex ? this.suggestionIndex + 1 : this.suggestionIndex;
-      break;
-    }
-  },
   search: function () {
-    var searchInput = this.$.searchField;
-
     // if the text input is visible we do a search
-    if (searchInput.style.display !== 'none') {
-      this.fire('uqlibrary-toolbar-search-submitted', {searchTerm: searchInput.value});
+    if (this.$.searchField.style.display !== 'none') {
+      this.fire('uqlibrary-toolbar-search-submitted', {searchTerm: this.searchTerm});
     }
     else {
       // if the text input is hidden we then display it
       this.activateSearch();
+      this.suggestions = [];
     }
-
-    this.suggestions = [];
   },
   clearSearchForm: function () {
     this.suggestions = [];
@@ -159,8 +136,11 @@ Polymer({
   _hasAppLinks: function (appLinks) {
     return appLinks.length > 0;
   },
-  _getSearchFieldWrapper: function() {
-    return this.$.searchFieldWrapper;
+  _hasSuggestions: function (suggestions) {
+    return suggestions.length > 0;
+  },
+  _getSearchField: function() {
+    return this.$.searchField;
   },
   _emptyValue: function(val) {
     return !val;

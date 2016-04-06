@@ -32,7 +32,8 @@
     <paper-toolbar id="mainToolbar" class="searchElement">
       <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="menuClicked" class="hideSearch"></paper-icon-button>
 
-      <paper-icon-button icon="arrow-back" id="backArrow" on-tap="goBack" class="hideSearch" hidden$="{{_emptyValue(appBackUrl)}}"></paper-icon-button>
+      <paper-icon-button icon="arrow-back" id="backArrow" on-tap="goBack" class="hideSearch"
+                         hidden$="{{_emptyValue(appBackUrl)}}"></paper-icon-button>
 
       <span class="title hideSearch">
         <a class="applicationName" href$="{{appTitleLink}}">{{appTitle}}</a>
@@ -42,20 +43,8 @@
                          class="showSearch searchElement"></paper-icon-button>
 
       <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="search"></iron-a11y-keys>
-      <uqlibrary-search-input id="searchField" label="{{searchPlaceholderText}}" value="{{searchFieldValue}}" class="showSearch searchElement"></uqlibrary-search-input>
 
-      <div class="offCanvas">
-        <iron-dropdown id="autosuggest" opened="{{openSuggestions}}" class="no-padding"
-                       position-target="{{_getSearchFieldWrapper()}}" autofocusdisabled="true">
-          <iron-selector id="suggestionSelector" selected="{{suggestionIndex}}">
-            <template is="dom-repeat" items="{{suggestions}}" as="item" index-as="idx">
-              <paper-item>
-                <div class="truncate">{{item.text}}</div>
-              </paper-item>
-            </template>
-          </iron-selector>
-        </iron-dropdown>
-      </div>
+      <uqlibrary-search-input id="searchField" suggestions="{{suggestions}}" label="{{searchPlaceholderText}}" class="showSearch searchElement"></uqlibrary-search-input>
 
       <paper-icon-button on-tap="search" icon="search" id="searchButton"></paper-icon-button>
 
@@ -73,7 +62,6 @@
           </paper-menu-button>
         </div>
       </template>
-
     </paper-toolbar>
   </template>
   <script src="uqlibrary-toolbar.js"></script>
