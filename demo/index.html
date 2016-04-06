@@ -26,12 +26,6 @@
     document.cookie = "UQLMockData=enabled";
     document.cookie = "UQLMockData-PType=1";
 
-    var testSuggestions = [
-      'I am a test one',
-      'I am a test two',
-      'I am a test three'
-    ];
-
     var uqlibraryToolbar = document.querySelector('uqlibrary-toolbar');
     var divLog = document.querySelector('#log');
 
@@ -46,6 +40,12 @@
       divLog.innerHTML += msg + '<br>';
     });
 
+    uqlibraryToolbar.addEventListener('uqlibrary-toolbar-link-clicked', function (e) {
+      var msg = 'link was clicked with value ' + e.detail;
+      console.log(msg)
+      divLog.innerHTML += msg + '<br>';
+    });
+
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-search-submitted', function (e) {
       console.log('submitted term: ' + e.detail.searchTerm);
       divLog.innerHTML += 'submitted term: ' + e.detail.searchTerm + "<br>";
@@ -53,7 +53,6 @@
       if (e.detail.searchItem) {
         console.log('submitted item: ' + e.detail.searchItem.value);
         divLog.innerHTML += 'submitted item: ' + e.detail.searchItem.value + "<br>";
-        uqlibraryToolbar.suggestions = testSuggestions;
       }
     });
 

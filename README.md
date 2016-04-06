@@ -3,6 +3,16 @@
 uqlibrary-toolbar displays a toolbar which takes an initialisation state, most fundamentally a title, but also 
 including search and a back event
 
+## Events
+
+| Event type                            | Event data             | Description                                                                                   |
+| ------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
+| uqlibrary-toolbar-menu-clicked        | na                     | Hamburger menu on left selected                                                               |
+| uqlibrary-toolbar-back-clicked        | Href of back link      | Back arrow clicked                                                                            |
+| uqlibrary-toolbar-link-clicked        | Href of link           | Link in more menu on right clicked                                                            |
+| uqlibrary-toolbar-search-value-changed| Current search value   | a character has been typed in search                                                          |
+| uqlibrary-toolbar-search-submitted    | Submitted value        | The user has either pressed enter, clicked the search icon, or selected from the autocomplete |
+
 Example of full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-toolbar).
 
 ### Getting Started

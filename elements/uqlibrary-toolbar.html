@@ -1,38 +1,18 @@
 <link rel="import" href="elements.html">
 
 <dom-module id="uqlibrary-toolbar">
-  <style>
+  <style is="custom-style" include="toolbar-styles">
     :host {
       @apply(--layout-horizontal);
     }
 
-    #mainToolbar {
-      @apply(--layout-flex);
-    }
 
-    uqlibrary-search-input {
-      @apply(--layout-flex);
-    }
-
-    #suggestionSelector paper-item > div {
-      @apply(--layout-flex);
-    }
-
-    .applicationName {
-      color: white;
-      text-decoration: none;
-    }
-
-    .activeSearch {
-      background-color: white;
-      color: black;
-    }
   </style>
   <template>
     <paper-toolbar id="mainToolbar" class="searchElement">
       <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="menuClicked" class="hideSearch"></paper-icon-button>
 
-      <paper-icon-button icon="arrow-back" id="backArrow" on-tap="goBack" class="hideSearch"
+      <paper-icon-button icon="arrow-back" id="backArrow" on-tap="backClicked" class="hideSearch"
                          hidden$="{{_emptyValue(appBackUrl)}}"></paper-icon-button>
 
       <span class="title hideSearch">

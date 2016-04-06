@@ -29,9 +29,6 @@ Polymer({
       type: String,
       value: null
     },
-    suggestionIndex: {
-      observer: 'suggestionIndexChanged'
-    },
     suggestions: {
       type: Array,
       value: function () {
@@ -42,16 +39,18 @@ Polymer({
       observer: 'suggestionsChanged'
     }
   },
-  created: function () {
-    this.ignoreIndexChanged = false;
-  },
   ready: function () {
     var that = this;
     // by default search is not active
     this.deactivateSearch();
+    // listen for events from the autosuggest
     this.addEventListener('keyword-changed', this.searchFieldValueChanged);
     this.addEventListener('activated', this.autocompleteChosen);
   },
+  /**
+   * Function called when search needs to be activated,
+   * hides all non search elements, sets styles etc
+   */
   activateSearch: function () {
     var els = this.querySelectorAll('.hideSearch');
 
@@ -73,6 +72,10 @@ Polymer({
       rels[ri].classList.add('activeSearch');
     }
   },
+  /**
+   * Function called when search is not activated (default state)
+   * hides all search elements, resets styles etc
+   */
   deactivateSearch: function () {
     var els = this.querySelectorAll('.hideSearch');
 
@@ -92,33 +95,56 @@ Polymer({
       rels[ri].classList.remove('activeSearch');
     }
   },
+  /**
+   * Callback to fire notification that menu has been clicked
+   */
   menuClicked: function () {
     this.fire('uqlibrary-toolbar-menu-clicked');
   },
-  goBack: function () {
+  /**
+   * Callback to fire notification that back has been clicked
+   */
+  backClicked: function () {
     this.fire('uqlibrary-toolbar-back-clicked', this.appBackUrl);
   },
+  /**
+   * A character has been typed in search
+   * @param evt
+   */
   searchFieldValueChanged: function (evt) {
     this.searchTerm = evt.detail.value;
     this.fire('uqlibrary-toolbar-search-value-changed', {value: this.searchTerm});
   },
+  /**
+   * A value has been chosen from the autocomplete dropdown
+   * @param evt
+   */
   autocompleteChosen: function (evt) {
-    this.searchTerm = evt.detail;
-    this.fire('uqlibrary-toolbar-search-submitted', {searchTerm: this.searchTerm});
+    this.searchSubmitted(evt.detail);
   },
+  /**
+   * searchSubmitted
+   *
+   * @param {String}  searchTerm
+   */
+  searchSubmitted: function (searchTerm) {
+    this.fire('uqlibrary-toolbar-search-submitted', {searchTerm: searchTerm});
+  },
+  /**
+   * This list of suggestions has been updated, probably externally
+   * @param newValue
+   */
   suggestionsChanged: function (newValue) {
     this.openSuggestions = this._hasSuggestions(newValue);
   },
-  suggestionIndexChanged: function (newValue, oldValue) {
-    if (!this.ignoreIndexChanged && this.suggestionIndex != null && this.suggestionIndex >= 0) {
-      this.search({searchItem: this.suggestions[this.suggestionIndex]});
-    }
-    this.ignoreIndexChanged = false;
-  },
+  /**
+   * If the search input is not active, display it.  If it is
+   * active, perform a search
+   */
   search: function () {
     // if the text input is visible we do a search
     if (this.$.searchField.style.display !== 'none') {
-      this.fire('uqlibrary-toolbar-search-submitted', {searchTerm: this.searchTerm});
+      this.searchSubmitted(this.searchTerm);
     }
     else {
       // if the text input is hidden we then display it
@@ -126,22 +152,42 @@ Polymer({
       this.suggestions = [];
     }
   },
-  clearSearchForm: function () {
-    this.suggestions = [];
-    this.searchFieldValue = '';
-  },
+  /**
+   * App link has been clicked
+   *
+   * @param e
+   * @param detail
+   * @param sender
+   */
   linkClicked: function (e, detail, sender) {
     this.fire('uqlibrary-toolbar-link-clicked', e.target.href);
   },
+  /**
+   * Has some app links, currently used to show/hide additional menu
+   * @param appLinks
+   * @returns {boolean}
+   * @private
+   */
   _hasAppLinks: function (appLinks) {
     return appLinks.length > 0;
   },
+  /**
+   * Have search suggestions been added
+   *
+   * @param suggestions
+   * @returns {boolean}
+   * @private
+   */
   _hasSuggestions: function (suggestions) {
     return suggestions.length > 0;
   },
-  _getSearchField: function() {
-    return this.$.searchField;
-  },
+  /**
+   * Does the passed in value have falsiness
+   *
+   * @param val
+   * @returns {boolean}
+   * @private
+   */
   _emptyValue: function(val) {
     return !val;
   }
