@@ -16,12 +16,11 @@
 <test-fixture id="element">
   <template>
     <uqlibrary-toolbar
-        appTitle='Application Name'
-        appTitleLink='#'
+        app-title='Application Name'
         app-back-url="http://slashdot.org"
-        appLinks='[{"label": "Switch back", "action": "#"}, {"label": "Help", "url": "#"}, {"label": "Feedback", "url": "#"}]'
-        searchPlaceholderText="Search">
-    </uqlibrary-toolbar>
+        app-title-link='#'
+        app-links='[{"label": "Switch back", "action": "#"}, {"label": "Help", "url": "#"}, {"label": "Feedback", "url": "#"}]'
+        search-placeholder-text="Search for something"></uqlibrary-toolbar>
   </template>
 </test-fixture>
 
@@ -40,78 +39,81 @@
 
     test('should display toolbar icon buttons', function () {
       // menu icon
-      var menuIcon = document.getElementById('hambugerMenuIcon');
-      debugger;
+      var menuIcon = element.querySelector('#hamburgerMenuIcon');
       expect(menuIcon).not.to.be.null;
 
       // search icon
-      var searchIcon = element.$.rightFlex.querySelector('paper-icon-button');
-      //expect(searchIcon).not.to.be.null;
+      var searchIcon = element.querySelector('#searchButton');
+      expect(searchIcon).not.to.be.null;
 
-      // search icon
-      var appLinksIcon = element.$.appLinksIcon.querySelector('paper-icon-button');
-      //expect(appLinksIcon).not.to.be.null;
+      // back icon
+      var backIcon = element.querySelector('#backArrow');
+      expect(backIcon).not.to.be.null;
 
+      // app links, not returns true even without applinks, just says the icon is there
+      var appLinksIcon = element.querySelector('#appLinksIcon');
+      expect(appLinksIcon).not.to.be.null;
+    });
+
+    test('should display search input when search button is tapped', function (done) {
+      var searchField = element.querySelector('#searchField');
+      expect(searchField.style.display).to.equal('none');
+      var searchIcon = element.querySelector('#searchButton');
+      searchIcon.fire('tap');
+      flush(function () {
+        expect(searchField.style.visibility).to.equal('');
+        done();
+      });
     });
 
     /*
-    test('should display search input when search button is tapped', function (done) {
-      var searchIcon = element.$.expandSearch.querySelector('paper-icon-button');
+    test('should search suggestions', function (done) {
+      var searchIcon = element.querySelector('#searchButton');
       searchIcon.fire('tap');
 
-
       // Test search suggestions
-      document.addEventListener('uqlibrary-toolbar-search-value-changed', function (e) {
+      element.addEventListener('uqlibrary-toolbar-search-value-changed', function (e) {
         element.suggestions = [{text: 'suggestion 1'}, {text: 'suggestion 2'},
           {text: 'suggestion 3', url: 'http://google.com'}];
       });
 
-      // Search suggestion clicked - search submitted event handler
-      document.addEventListener('uqlibrary-toolbar-search-submitted', function (e) {
-        var searchTerm = e.detail.searchTerm;
-        expect(searchTerm).to.be.equal('suggestion 1');
-      });
+       // Search suggestion clicked - search submitted event handler
+       element.addEventListener('uqlibrary-toolbar-search-submitted', function (e) {
+       var searchTerm = e.detail.searchTerm;
+       expect(searchTerm).to.be.equal('suggestion 1');
+       });
 
-      setTimeout(function () {
-        element.searchFieldValue = 'test';
+      element.searchFieldValue = 'test';
 
+      flush(function () {
+        var suggestions = element.querySelectorAll('uqlibrary-autosuggest-input paper-item');
+        expect(suggestions).to.have.length(3);
+
+        suggestions[0].fire('tap');
+
+        // wait for search submit event fired
         setTimeout(function () {
-          var suggestions = element.$.suggestionSelector.querySelectorAll('paper-item');
-          expect(suggestions).to.have.length(3);
+          done();
+        }, 100);
 
-          suggestions[0].fire('tap');
-          // wait for search submit event fired
-          setTimeout(function () {
-            done();
-          }, 1000);
-
-        }, 1000);
-      }, 1000);
-
+      });
+     */
     });
 
     test('should fire event when menu button is tapped', function (done) {
 
-      var fired = false;
+      //check if event has been fired
       document.addEventListener('uqlibrary-toolbar-menu-clicked', function (e) {
-        fired = true;
+        expect(true).to.be.true;
+        done();
       });
 
       setTimeout(function () {
-        var menuIcon = element.$.hamburgerMenuIcon.querySelector('paper-icon-button');
+        var menuIcon = element.querySelector('#hamburgerMenuIcon');
         menuIcon.fire('tap');
-
-        //check if event has been fired
-        setTimeout(function () {
-          expect(fired).to.be.true;
-          done();
-        }, 1000);
-
-
-      }, 1000);
+      }, 100);
 
     });
-    */
   });
 </script>
 

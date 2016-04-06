@@ -41,7 +41,7 @@
     });
 
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-link-clicked', function (e) {
-      var msg = 'link was clicked with value ' + e.detail;
+      var msg = 'link was clicked with data ' + e.detail.data;
       console.log(msg)
       divLog.innerHTML += msg + '<br>';
     });

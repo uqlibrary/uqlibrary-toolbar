@@ -24,24 +24,23 @@
 
       <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="search"></iron-a11y-keys>
 
-      <uqlibrary-search-input id="searchField" suggestions="{{suggestions}}" label="{{searchPlaceholderText}}" class="showSearch searchElement"></uqlibrary-search-input>
+      <uqlibrary-search-input id="searchField" suggestions="{{suggestions}}" label="{{searchPlaceholderText}}"
+                              class="showSearch searchElement"></uqlibrary-search-input>
 
       <paper-icon-button on-tap="search" icon="search" id="searchButton"></paper-icon-button>
 
-      <template is="dom-if" if="{{_hasAppLinks(appLinks)}}">
-        <div id="appLinksIcon" class="hideSearch">
-          <paper-menu-button horizontal-align="right" vertical-align="below">
-            <paper-icon-button icon="more-vert" class="dropdown-trigger" alt="Options Menu"></paper-icon-button>
-            <paper-menu class="dropdown-content">
-              <template is="dom-repeat" items="{{appLinks}}" as="link">
-                <paper-item>
-                  <a on-tap="linkClicked" href$="{{link.url}}" data-title$="{{link.label}}">{{link.label}}</a>
-                </paper-item>
-              </template>
-            </paper-menu>
-          </paper-menu-button>
-        </div>
-      </template>
+      <div id="appLinksIcon" class="hideSearch" hidden$="{{_emptyValue(appLinks)}}">
+        <paper-menu-button horizontal-align="right" vertical-align="below">
+          <paper-icon-button icon="more-vert" class="dropdown-trigger" alt="Options Menu"></paper-icon-button>
+          <paper-menu class="dropdown-content">
+            <template is="dom-repeat" items="{{appLinks}}" as="link">
+              <paper-item>
+                <a on-tap="linkClicked" href$="{{link.url}}" data-title$="{{link.label}}">{{link.label}}</a>
+              </paper-item>
+            </template>
+          </paper-menu>
+        </paper-menu-button>
+      </div>
     </paper-toolbar>
   </template>
   <script src="uqlibrary-toolbar.js"></script>

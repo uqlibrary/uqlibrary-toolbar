@@ -5,8 +5,7 @@ Polymer({
       type: Array,
       value: function () {
         return [];
-      },
-      notify: true
+      }
     },
     appTitle: {
       type: String,
@@ -159,8 +158,8 @@ Polymer({
    * @param detail
    * @param sender
    */
-  linkClicked: function (e, detail, sender) {
-    this.fire('uqlibrary-toolbar-link-clicked', e.target.href);
+  linkClicked: function (e) {
+    this.fire('uqlibrary-toolbar-link-clicked', {href: e.target.href, data: e.target.dataset.title});
   },
   /**
    * Has some app links, currently used to show/hide additional menu
