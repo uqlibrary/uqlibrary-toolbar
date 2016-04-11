@@ -65,11 +65,11 @@ Polymer({
 
     this.$.searchField.show();
 
-    var rels = this.querySelectorAll('.searchElement');
+    //var rels = this.querySelectorAll('.searchElement');
 
-    for (var ri = 0, rl = rels.length; ri < rl; ri++) {
-      rels[ri].classList.add('activeSearch');
-    }
+    //for (var ri = 0, rl = rels.length; ri < rl; ri++) {
+    //  rels[ri].classList.add('activeSearch');
+    //}
   },
   /**
    * Function called when search is not activated (default state)
