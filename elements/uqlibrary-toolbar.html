@@ -1,14 +1,12 @@
 <link rel="import" href="elements.html">
 
 <dom-module id="uqlibrary-toolbar">
-  <style is="custom-style" include="toolbar-styles">
-    :host {
-      @apply(--layout-horizontal);
-    }
-
-
-  </style>
   <template>
+    <style is="custom-style" include="toolbar-styles">
+      :host {
+        @apply(--layout-horizontal);
+      }
+    </style>
     <paper-toolbar id="mainToolbar" class="searchElement">
       <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="menuClicked" class="hideSearch"></paper-icon-button>
 
