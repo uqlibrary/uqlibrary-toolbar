@@ -8,8 +8,8 @@ var ret = {
 	plugins: {
 		local: {
 			browsers: [
-				'chrome'//,
-				//'firefox'
+				'chrome',
+				'firefox'
 			]
 		}
 	}

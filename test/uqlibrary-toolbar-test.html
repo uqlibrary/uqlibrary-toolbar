@@ -66,38 +66,19 @@
       });
     });
 
-    /*
     test('should search suggestions', function (done) {
       var searchIcon = element.querySelector('#searchButton');
       searchIcon.fire('tap');
 
       // Test search suggestions
-      element.addEventListener('uqlibrary-toolbar-search-value-changed', function (e) {
-        element.suggestions = [{text: 'suggestion 1'}, {text: 'suggestion 2'},
-          {text: 'suggestion 3', url: 'http://google.com'}];
-      });
-
-       // Search suggestion clicked - search submitted event handler
-       element.addEventListener('uqlibrary-toolbar-search-submitted', function (e) {
-       var searchTerm = e.detail.searchTerm;
-       expect(searchTerm).to.be.equal('suggestion 1');
-       });
-
-      element.searchFieldValue = 'test';
+      element.suggestions = [{text: 'suggestion 1'}, {text: 'suggestion 2'},
+        {text: 'suggestion 3', url: 'http://google.com'}];
 
       flush(function () {
         var suggestions = element.querySelectorAll('uqlibrary-autosuggest-input paper-item');
         expect(suggestions).to.have.length(3);
-
-        suggestions[0].fire('tap');
-
-        // wait for search submit event fired
-        setTimeout(function () {
-          done();
-        }, 100);
-
+        done();
       });
-     */
     });
 
     test('should fire event when menu button is tapped', function (done) {
