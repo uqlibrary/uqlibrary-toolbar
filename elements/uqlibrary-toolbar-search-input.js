@@ -48,6 +48,7 @@
     show: function () {
       this.opened = true;
       this.style.display = 'inline-block';
+      this.$.uai.setFocus();
       // run scale-up-animation
       this.playAnimation('entry');
     },
@@ -55,6 +56,9 @@
       this.opened = false;
       // run fade-out-animation
       this.playAnimation('exit');
+    },
+    clear: function () {
+      this.$.uai.clear();
     },
     _onNeonAnimationFinish: function () {
       if (!this.opened) {

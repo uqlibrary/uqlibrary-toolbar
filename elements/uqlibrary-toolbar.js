@@ -65,6 +65,8 @@ Polymer({
 
     this.$.searchField.show();
 
+    // used to add new class to search field when active
+    // turned off to be more consistent with Polymer standard
     //var rels = this.querySelectorAll('.searchElement');
 
     //for (var ri = 0, rl = rels.length; ri < rl; ri++) {
@@ -88,11 +90,15 @@ Polymer({
       sels[si].style.display = 'none';
     }
 
-    var rels = this.querySelectorAll('.searchElement');
+    // used to add new class to search field when active
+    // turned off to be more consistent with Polymer standard
+    //var rels = this.querySelectorAll('.searchElement');
 
-    for (var ri = 0, rl = rels.length; ri < rl; ri++) {
-      rels[ri].classList.remove('activeSearch');
-    }
+    //for (var ri = 0, rl = rels.length; ri < rl; ri++) {
+    //  rels[ri].classList.remove('activeSearch');
+    //}
+
+    this.$.searchField.clear();
   },
   /**
    * Callback to fire notification that menu has been clicked
