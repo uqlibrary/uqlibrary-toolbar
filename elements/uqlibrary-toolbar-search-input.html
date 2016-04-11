@@ -4,9 +4,9 @@ Created in order to add animations to the auto suggest, pretty lame animation an
 
 <link rel="import" href="elements.html">
 
-<dom-module id="uqlibrary-search-input">
+<dom-module id="uqlibrary-toolbar-search-input">
   <template>
-    <style include="shared-styles">
+    <style is="custom-style" include="toolbar-styles">
       :host {
       }
       uqlibrary-autosuggest-input {
@@ -18,5 +18,5 @@ Created in order to add animations to the auto suggest, pretty lame animation an
     <uqlibrary-autosuggest-input id="uai" suggestions="{{suggestions}}" label="{{label}}" enable-autosuggest='true'></uqlibrary-autosuggest-input>
   </template>
 
-  <script src="uqlibrary-search-input.js"></script>
+  <script src="uqlibrary-toolbar-search-input.js"></script>
 </dom-module>

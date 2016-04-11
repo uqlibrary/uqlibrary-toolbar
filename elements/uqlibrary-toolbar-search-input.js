@@ -2,7 +2,7 @@
   'use strict';
 
   Polymer({
-    is: 'uqlibrary-search-input',
+    is: 'uqlibrary-toolbar-search-input',
     behaviors: [
       Polymer.NeonAnimatableBehavior,
       Polymer.NeonAnimationRunnerBehavior
