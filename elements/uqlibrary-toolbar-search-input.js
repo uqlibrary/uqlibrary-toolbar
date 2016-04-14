@@ -1,6 +1,10 @@
 (function () {
   'use strict';
 
+  /**
+   * Created this just so I can have the animation on the input
+   * might be a simpler way to do this!
+   */
   Polymer({
     is: 'uqlibrary-toolbar-search-input',
     behaviors: [
