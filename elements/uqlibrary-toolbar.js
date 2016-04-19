@@ -67,12 +67,11 @@ Polymer({
     this.$.searchField.show();
 
     // used to add new class to search field when active
-    // turned off to be more consistent with Polymer standard
-    //var rels = this.querySelectorAll('.searchElement');
+    var rels = this.querySelectorAll('.searchElement');
 
-    //for (var ri = 0, rl = rels.length; ri < rl; ri++) {
-    //  rels[ri].classList.add('activeSearch');
-    //}
+    for (var ri = 0, rl = rels.length; ri < rl; ri++) {
+      rels[ri].classList.add('activeSearch');
+    }
   },
   /**
    * Function called when search is not activated (default state)
@@ -92,12 +91,11 @@ Polymer({
     }
 
     // used to add new class to search field when active
-    // turned off to be more consistent with Polymer standard
-    //var rels = this.querySelectorAll('.searchElement');
+    var rels = this.querySelectorAll('.searchElement');
 
-    //for (var ri = 0, rl = rels.length; ri < rl; ri++) {
-    //  rels[ri].classList.remove('activeSearch');
-    //}
+    for (var ri = 0, rl = rels.length; ri < rl; ri++) {
+      rels[ri].classList.remove('activeSearch');
+    }
 
     this.$.searchField.clear();
   },

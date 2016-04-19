@@ -19,14 +19,23 @@
         margin-left: 56px;
       }
 
+      /*
+      Disabling to be more consistent with Polymer standards
       .activeSearch {
         background-color: white;
         color: black;
       }
+      */
 
       uqlibrary-autosuggest-input {
         --paper-input-container-color: var(--theme-color-light);
         --paper-input-container-input-color: white;
+        --paper-input-container-label-focus: {
+          color: var(--theme-color-light) !important;
+        };
+        --paper-input-container-underline-focus: {
+          background-color: var(--theme-color-light);
+        };
       }
     </style>
   </template>
