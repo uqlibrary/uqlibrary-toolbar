@@ -71,8 +71,8 @@
       searchIcon.fire('tap');
 
       // Test search suggestions
-      element.suggestions = [{text: 'suggestion 1'}, {text: 'suggestion 2'},
-        {text: 'suggestion 3', url: 'http://google.com'}];
+      element.suggestions = [{name: 'suggestion 1'}, {name: 'suggestion 2'},
+        {name: 'suggestion 3', url: 'http://google.com'}];
 
       flush(function () {
         var suggestions = element.querySelectorAll('uqlibrary-autosuggest-input paper-item');

@@ -15,6 +15,7 @@ Polymer({
       type: String,
       notify: true
     },
+    itemLabel: String,
     searchPlaceholderText: {
       type: String,
       value: 'Search...',

@@ -16,7 +16,7 @@
                          hidden$="{{_emptyValue(appBackUrl)}}"></paper-icon-button>
 
       <span class="title hideSearch">
-        <a class="applicationName" href$="{{appTitleLink}}">{{appTitle}}</a>
+        <a class="applicationName" href$="[[appTitleLink]]">[[appTitle]]</a>
       </span>
 
       <paper-icon-button icon="close" id="closeButton" on-tap="deactivateSearch"
@@ -24,7 +24,7 @@
 
       <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="search"></iron-a11y-keys>
 
-      <uqlibrary-toolbar-search-input id="searchField" suggestions="{{suggestions}}" label="{{searchPlaceholderText}}"
+      <uqlibrary-toolbar-search-input id="searchField" item-label="[[itemLabel]]" suggestions="[[suggestions]]" label="[[searchPlaceholderText]]"
                               class="showSearch searchElement"></uqlibrary-toolbar-search-input>
 
       <paper-icon-button on-tap="search" icon="search" id="searchButton"></paper-icon-button>
@@ -33,9 +33,9 @@
         <paper-menu-button horizontal-align="right" vertical-align="below">
           <paper-icon-button icon="more-vert" class="dropdown-trigger" alt="Options Menu"></paper-icon-button>
           <paper-menu class="dropdown-content">
-            <template is="dom-repeat" items="{{appLinks}}" as="link">
+            <template is="dom-repeat" items="[[appLinks]]" as="link">
               <paper-item>
-                <a on-tap="linkClicked" href$="{{link.url}}" data-title$="{{link.label}}">{{link.label}}</a>
+                <a on-tap="linkClicked" href$="[[link.url]]" data-title$="[[link.label]]">[[link.label]]</a>
               </paper-item>
             </template>
           </paper-menu>

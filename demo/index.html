@@ -63,7 +63,7 @@
         var suggestions = [];
 
         for (var i = 0; i < 10 - e.detail.value.length; i++) {
-          var item = {name: e.detail.value + " " + i, recent: false};
+          var item = {name: e.detail.value + " " + i, label: e.detail.value + " label " + i, recent: false};
           suggestions.push(item);
         }
 

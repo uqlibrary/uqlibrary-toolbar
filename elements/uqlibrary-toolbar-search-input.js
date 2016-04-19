@@ -18,6 +18,7 @@
           return [];
         }
       },
+      itemLabel: String,
       label: {
         type: String,
         value: 'Search'
