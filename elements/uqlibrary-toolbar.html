@@ -1,46 +1,71 @@
 <link rel="import" href="elements.html">
-<link rel="import" href="uqlibrary-toolbar-styles.html">
-<link rel="import" href="uqlibrary-toolbar-search-input.html">
 
 <dom-module id="uqlibrary-toolbar">
   <template>
-    <style is="custom-style" include="toolbar-styles">
+    <style is="custom-style" include="common-styles">
       :host {
-        @apply(--layout-horizontal);
       }
+
+      uqlibrary-autosuggest-input {
+        width: calc(100% - 80px);
+
+        --paper-input-container-color: var(--theme-color-light);
+        --paper-input-container-input-color: white;
+        --paper-input-container-label-focus: {
+          color: var(--theme-color-light) !important;
+        };
+        --paper-input-container-label-floating: {
+          color: var(--theme-color-light) !important;
+        };
+        --paper-input-container-underline-focus: {
+          background-color: var(--theme-color-light);
+        };
+      }
+
+      paper-icon-button {
+        --paper-icon-button-ink-color: {
+          color: var(--theme-color-light) !important;
+        };
+      }
+
     </style>
-    <paper-toolbar id="mainToolbar" class="searchElement">
-      <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="menuClicked" class="hideSearch"></paper-icon-button>
+    <paper-toolbar id="mainToolbar">
 
-      <paper-icon-button icon="arrow-back" id="backArrow" on-tap="backClicked" class="hideSearch"
-                         hidden$="{{_emptyValue(appBackUrl)}}"></paper-icon-button>
+      <template is="dom-if" if="{{!_searchInProgress}}">
 
-      <h1 class="title hideSearch">
-        <a class="applicationName" href$="[[appTitleLink]]">[[appTitle]]</a>
-      </h1>
+        <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="_menuActivated" title="open menu" aria-label="open menu" alt="menu icon"></paper-icon-button>
 
-      <paper-icon-button icon="close" id="closeButton" on-tap="deactivateSearch"
-                         class="showSearch searchElement"></paper-icon-button>
+        <div class="title uqlibrary-app-title">[[headerTitle]]</div>
 
-      <iron-a11y-keys id="a11y" keys="enter" on-keys-pressed="search"></iron-a11y-keys>
+        <paper-icon-button on-tap="_showSearch" icon="search" id="searchButton" title="show search" aria-label="show search" alt="search icon"></paper-icon-button>
 
-      <uqlibrary-toolbar-search-input id="searchField" item-label="[[itemLabel]]" suggestions="[[suggestions]]" label="[[searchPlaceholderText]]"
-                              class="showSearch searchElement"></uqlibrary-toolbar-search-input>
+        <template is="dom-if" if="{{_hasAppLinks(appLinks)}}">
 
-      <paper-icon-button on-tap="search" icon="search" id="searchButton"></paper-icon-button>
+          <paper-menu-button horizontal-align="right" vertical-align="below">
+            <paper-icon-button id="actionsButton" icon="more-vert" class="dropdown-trigger" title="show more options" aria-label="show more options" alt="actions icon"></paper-icon-button>
+            <paper-listbox id="listActions" on-iron-activate="_actionSelected" class="dropdown-content"
+                           no-auto-focus="true" aria-label="Select action item" title="Select action item">
+              <template is="dom-repeat" items="[[appLinks]]" as="link">
+                <paper-item role="menuitem">[[link.label]]</paper-item>
+              </template>
 
-      <div id="appLinksIcon" class="hideSearch" hidden$="{{_emptyValue(appLinks)}}">
-        <paper-menu-button horizontal-align="right" vertical-align="below">
-          <paper-icon-button icon="more-vert" class="dropdown-trigger" alt="Options Menu"></paper-icon-button>
-          <paper-menu class="dropdown-content">
-            <template is="dom-repeat" items="[[appLinks]]" as="link">
-              <paper-item role="menuitem">
-                <a on-tap="linkClicked" href$="[[link.url]]" data-title$="[[link.label]]">[[link.label]]</a>
-              </paper-item>
-            </template>
-          </paper-menu>
-        </paper-menu-button>
-      </div>
+            </paper-listbox>
+          </paper-menu-button>
+
+        </template>
+      </template>
+
+      <template is="dom-if" if="{{_searchInProgress}}">
+        <paper-icon-button id="cancelSearchButton" icon="arrow-back" on-tap="_hideSearch" title="cancel search" aria-label="cancel search" alt="back icon"></paper-icon-button>
+
+        <uqlibrary-autosuggest-input item-label="[[itemLabel]]" suggestions="[[suggestions]]"
+                                     keyword="{{searchTerm}}" label="[[searchPlaceholderText]]"
+                                     enable-autosuggest="[[enableAutosuggest]]" on-activated="_searchActivated"
+                                     no-label-float="true"></uqlibrary-autosuggest-input>
+
+        <paper-icon-button id="activateSearchButton" on-tap="_searchActivated" icon="search" title="activate search" aria-label="activate search" alt="search icon"></paper-icon-button>
+      </template>
+
     </paper-toolbar>
   </template>
   <script src="uqlibrary-toolbar.js"></script>

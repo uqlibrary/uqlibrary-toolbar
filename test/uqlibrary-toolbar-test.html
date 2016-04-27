@@ -16,9 +16,7 @@
 <test-fixture id="element">
   <template>
     <uqlibrary-toolbar
-        app-title='Application Name'
-        app-back-url="http://slashdot.org"
-        app-title-link='#'
+        header-title='Application Name'
         app-links='[{"label": "Switch back", "action": "#"}, {"label": "Help", "url": "#"}, {"label": "Feedback", "url": "#"}]'
         search-placeholder-text="Search for something"></uqlibrary-toolbar>
   </template>
@@ -33,51 +31,67 @@
       element = fixture('element');
     });
 
-    test('It should display toolbar', function () {
-      expect(element).not.to.be.null;
-    });
-
-    test('should display toolbar icon buttons', function () {
-      // menu icon
-      var menuIcon = element.querySelector('#hamburgerMenuIcon');
-      expect(menuIcon).not.to.be.null;
-
-      // search icon
-      var searchIcon = element.querySelector('#searchButton');
-      expect(searchIcon).not.to.be.null;
-
-      // back icon
-      var backIcon = element.querySelector('#backArrow');
-      expect(backIcon).not.to.be.null;
-
-      // app links, not returns true even without applinks, just says the icon is there
-      var appLinksIcon = element.querySelector('#appLinksIcon');
-      expect(appLinksIcon).not.to.be.null;
-    });
-
-    test('should display search input when search button is tapped', function (done) {
-      var searchField = element.querySelector('#searchField');
-      expect(searchField.style.display).to.equal('none');
-      var searchIcon = element.querySelector('#searchButton');
-      searchIcon.fire('tap');
+    test('It should display toolbar', function (done) {
       flush(function () {
-        expect(searchField.style.visibility).to.equal('');
+        expect(element).not.to.be.null;
+        expect(element).to.be.visible;
         done();
       });
     });
 
-    test('should search suggestions', function (done) {
-      var searchIcon = element.querySelector('#searchButton');
-      searchIcon.fire('tap');
+    test('should display toolbar when search is not activated', function (done) {
+      flush(function () {
+        // menu icon
+        var menuIcon = element.querySelector('#hamburgerMenuIcon');
+        expect(menuIcon).not.to.be.null;
+        expect(menuIcon).to.be.visible;
 
-      // Test search suggestions
-      element.suggestions = [{name: 'suggestion 1'}, {name: 'suggestion 2'},
-        {name: 'suggestion 3', url: 'http://google.com'}];
+        // search icon
+        var searchIcon = element.querySelector('#searchButton');
+        expect(searchIcon).not.to.be.null;
+        expect(searchIcon).to.be.visible;
+
+        // app links, not returns true even without applinks, just says the icon is there
+        var appLinksIcon = element.querySelector('#actionsButton');
+        expect(appLinksIcon).not.to.be.null;
+        expect(appLinksIcon).to.be.visible;
+
+        // app links, not returns true even without applinks, just says the icon is there
+        var toolbarTitle = element.querySelector('.title');
+        expect(toolbarTitle).not.to.be.null;
+        expect(toolbarTitle).to.be.visible;
+        expect(toolbarTitle.innerHTML).to.equal('Application Name');
+        console.log(toolbarTitle.innerHTML);
+
+        done();
+
+      });
+    });
+
+    test('should display search input when search button is tapped', function (done) {
 
       flush(function () {
-        var suggestions = element.querySelectorAll('uqlibrary-autosuggest-input paper-item');
-        expect(suggestions).to.have.length(3);
-        done();
+
+        var searchIcon = element.querySelector('#searchButton');
+        expect(searchIcon).not.to.be.null;
+        expect(searchIcon).to.be.visible;
+        searchIcon.fire('tap');
+        setTimeout(function () {
+
+          var cancelSearchButton = element.querySelector('#cancelSearchButton');
+          expect(cancelSearchButton).not.to.be.null;
+          expect(cancelSearchButton).to.be.visible;
+
+          var activateSearchButton = element.querySelector('#activateSearchButton');
+          expect(activateSearchButton).not.to.be.null;
+          expect(activateSearchButton).to.be.visible;
+
+          var input = element.querySelector('uqlibrary-autosuggest-input');
+          expect(input).not.to.be.null;
+          expect(input).to.be.visible;
+
+          done();
+        }, 100);
       });
     });
 

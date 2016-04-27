@@ -13,9 +13,8 @@
 <body class="fullbleed">
 
 <uqlibrary-toolbar
-    app-title='Application Name'
-    app-back-url="http://slashdot.org"
-    app-title-link='#'
+    header-title='Application Name'
+    enable-autosuggest='true'
     app-links='[{"label": "Switch back", "action": "#"}, {"label": "Help", "url": "#"}, {"label": "Feedback", "url": "#"}]'
     search-placeholder-text="Search for something"></uqlibrary-toolbar>
 
@@ -41,25 +40,24 @@
     });
 
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-link-clicked', function (e) {
-      var msg = 'link was clicked with data ' + e.detail.data;
+      var msg = 'link was clicked with label ' + e.detail.label;
       console.log(msg)
       divLog.innerHTML += msg + '<br>';
     });
 
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-search-submitted', function (e) {
-      console.log('submitted term: ' + e.detail.searchTerm);
-      divLog.innerHTML += 'submitted term: ' + e.detail.searchTerm + "<br>";
-
-      if (e.detail.searchItem) {
-        console.log('submitted item: ' + e.detail.searchItem.value);
-        divLog.innerHTML += 'submitted item: ' + e.detail.searchItem.value + "<br>";
+      if (typeof(e.detail.searchItem) !== 'undefined') {
+        console.log('submitted item: ' + e.detail.searchItem.name);
+        divLog.innerHTML += 'submitted item: ' + e.detail.searchItem.name + "<br>";
+      } else {
+        console.log('submitted term: ' + e.detail.searchTerm);
+        divLog.innerHTML += 'submitted term: ' + e.detail.searchTerm + "<br>";
       }
     });
 
-    var toolbar = document.querySelector('uqlibrary-toolbar');
-
-    toolbar.addEventListener('uqlibrary-toolbar-search-value-changed', function (e) {
+    uqlibraryToolbar.addEventListener('search-term-changed', function (e) {
       if (e.detail.value.length > 2) {
+
         var suggestions = [];
 
         for (var i = 0; i < 10 - e.detail.value.length; i++) {
@@ -67,9 +65,12 @@
           suggestions.push(item);
         }
 
+        console.log("keyword has been changed, display new autosuggestions (" + suggestions.length + " items)");
+
         uqlibraryToolbar.suggestions = suggestions;
       }
     });
+
   })();
 </script>
 </body>
