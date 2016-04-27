@@ -37,7 +37,9 @@
 
         <div class="title uqlibrary-app-title">[[headerTitle]]</div>
 
-        <paper-icon-button on-tap="_showSearch" icon="search" id="searchButton" title="show search" aria-label="show search" alt="search icon"></paper-icon-button>
+        <template is="dom-if" if="{{enableSearch}}">
+          <paper-icon-button on-tap="_showSearch" icon="search" id="searchButton" title="show search" aria-label="show search" alt="search icon"></paper-icon-button>
+        </template>
 
         <template is="dom-if" if="{{_hasAppLinks(appLinks)}}">
 
@@ -60,8 +62,7 @@
 
         <uqlibrary-autosuggest-input item-label="[[itemLabel]]" suggestions="[[suggestions]]"
                                      keyword="{{searchTerm}}" label="[[searchPlaceholderText]]"
-                                     enable-autosuggest="[[enableAutosuggest]]" on-activated="_searchActivated"
-                                     no-label-float="true"></uqlibrary-autosuggest-input>
+                                     on-activated="_searchActivated" no-label-float="true"></uqlibrary-autosuggest-input>
 
         <paper-icon-button id="activateSearchButton" on-tap="_searchActivated" icon="search" title="activate search" aria-label="activate search" alt="search icon"></paper-icon-button>
       </template>

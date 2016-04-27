@@ -14,7 +14,7 @@
 
 <uqlibrary-toolbar
     header-title='Application Name'
-    enable-autosuggest='true'
+    enable-search='true'
     app-links='[{"label": "Switch back", "action": "#"}, {"label": "Help", "url": "#"}, {"label": "Feedback", "url": "#"}]'
     search-placeholder-text="Search for something"></uqlibrary-toolbar>
 
@@ -31,12 +31,6 @@
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-menu-clicked', function () {
       console.log('menu was clicked')
       divLog.innerHTML += 'menu was clicked <br>';
-    });
-
-    uqlibraryToolbar.addEventListener('uqlibrary-toolbar-back-clicked', function (e) {
-      var msg = 'back was clicked with value ' + e.detail;
-      console.log(msg)
-      divLog.innerHTML += msg + '<br>';
     });
 
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-link-clicked', function (e) {

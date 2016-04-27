@@ -1,7 +1,7 @@
 {
   "name": "uqlibrary-toolbar",
   "version": "1.0.0",
-  "description": "Web component to display Academic stats",
+  "description": "Toolbar with search controls",
   "main": "index.html",
   "directories": {
     "test": "test"

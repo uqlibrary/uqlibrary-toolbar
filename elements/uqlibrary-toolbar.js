@@ -2,37 +2,58 @@ Polymer({
   is: 'uqlibrary-toolbar',
   properties: {
 
+    /*
+    * A list of items to be displayed in more actions menu
+    * item.label is displayed
+    * */
     appLinks: {
       type: Array,
       value: function () {
         return [];
       }
     },
-    
-    enableAutosuggest: {
-      type: Boolean,
-      value: true
+
+    /*
+    * Flag to enable/disable search bar
+    * */
+    enableSearch: {
+      type: Object
     },
-    
+
+    /*
+    * String to display on toolbar
+    * */
     headerTitle: {
       type: String
     },
-    
+
+    /*
+     * Autosuggestion property to display in drop down
+     * */
     itemLabel: {
       type: String,
       value: 'name'
     },
-    
+
+    /*
+     * Default text in search input field
+     * */
     searchPlaceholderText: {
       type: String,
       value: 'Search...'
     },
-    
+
+    /*
+     * Search term keyword
+     * */
     searchTerm: {
       type: String,
       notify: true
     },
-    
+
+    /*
+     * A list of suggestions to be displayed when user types in keyword
+     * */
     suggestions: {
       type: Array,
       value: function () {
@@ -43,27 +64,12 @@ Polymer({
     _searchInProgress: {
       type: Boolean,
       value: false
-    },
-
-    _inputMenuTarget: {
-      type: Object,
-      value: function () {
-        console.log(this.$.hamburgerMenuIcon);
-        return this.$.hamburgerMenuIcon;
-      }
-    },
-
-    _searchButtonTarget: {
-      type: Object,
-      value: function () {
-        return this.$.searchButton;
-      }
     }
-    
+
   },
   
   ready: function () {
-    
+
   },
 
   _showSearch: function() {
