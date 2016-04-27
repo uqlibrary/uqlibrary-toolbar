@@ -19,6 +19,13 @@ Polymer({
     enableSearch: {
       type: Object
     },
+    
+    /*
+    * Flag to enable/disable menu button
+    * */
+    enableMenu: {
+      type: Object
+    },
 
     /*
     * String to display on toolbar

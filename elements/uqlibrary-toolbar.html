@@ -33,7 +33,9 @@
 
       <template is="dom-if" if="{{!_searchInProgress}}">
 
-        <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="_menuActivated" title="open menu" aria-label="open menu" alt="menu icon"></paper-icon-button>
+        <template is="dom-if" if="{{enableMenu}}">
+          <paper-icon-button icon="menu" id="hamburgerMenuIcon" on-tap="_menuActivated" title="open menu" aria-label="open menu" alt="menu icon"></paper-icon-button>
+        </template>
 
         <div class="title uqlibrary-app-title">[[headerTitle]]</div>
 
