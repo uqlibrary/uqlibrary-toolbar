@@ -16,7 +16,8 @@
 <test-fixture id="element">
   <template>
     <uqlibrary-toolbar
-        header-title='Application Name'
+            enable-menu='true'
+            header-title='Application Name'
         search-placeholder-text="Search for something"></uqlibrary-toolbar>
   </template>
 </test-fixture>
@@ -42,6 +43,7 @@
       flush(function () {
         // menu icon
         var menuIcon = element.querySelector('#hamburgerMenuIcon');
+
         expect(menuIcon).not.to.be.null;
         expect(menuIcon).to.be.visible;
 
