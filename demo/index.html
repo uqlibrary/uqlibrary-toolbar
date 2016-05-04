@@ -35,22 +35,23 @@
     });
 
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-link-clicked', function (e) {
-      var msg = 'link was clicked with label ' + e.detail.label;
-      console.log(msg)
-      divLog.innerHTML += msg + '<br>';
+      showMsg('link was clicked with label ' + e.detail.label);
     });
 
     uqlibraryToolbar.addEventListener('uqlibrary-toolbar-search-submitted', function (e) {
       if (typeof(e.detail.searchItem) !== 'undefined') {
         console.log('submitted item: ' + e.detail.searchItem.name);
         divLog.innerHTML += 'submitted item: ' + e.detail.searchItem.name + "<br>";
-      } else {
+      }
+      else {
         console.log('submitted term: ' + e.detail.searchTerm);
         divLog.innerHTML += 'submitted term: ' + e.detail.searchTerm + "<br>";
       }
     });
 
     uqlibraryToolbar.addEventListener('search-term-changed', function (e) {
+      showMsg('search term changed: ' + e.detail.value);
+
       if (e.detail.value.length > 2) {
 
         var suggestions = [];
@@ -60,11 +61,16 @@
           suggestions.push(item);
         }
 
-        console.log("keyword has been changed, display new autosuggestions (" + suggestions.length + " items)");
+        showMsg('keyword has been changed, display new autosuggestions (' + suggestions.length + ' items)');
 
         uqlibraryToolbar.suggestions = suggestions;
       }
     });
+
+    function showMsg(msg) {
+      console.log(msg)
+      divLog.innerHTML += msg + '<br>';
+    }
 
   })();
 </script>
