@@ -62,7 +62,7 @@
       <template is="dom-if" if="{{_searchInProgress}}">
         <paper-icon-button id="cancelSearchButton" icon="arrow-back" on-tap="_hideSearch" title="cancel search" aria-label="cancel search" alt="back icon"></paper-icon-button>
 
-        <uqlibrary-autosuggest-input item-label="[[itemLabel]]" suggestions="[[suggestions]]"
+        <uqlibrary-autosuggest-input id="asi" item-label="[[itemLabel]]" suggestions="[[suggestions]]"
                                      keyword="{{searchTerm}}" label="[[searchPlaceholderText]]"
                                      on-activated="_searchActivated" no-label-float="true"></uqlibrary-autosuggest-input>
 

@@ -74,14 +74,14 @@ Polymer({
     }
 
   },
-  
-  ready: function () {
-
-  },
 
   _showSearch: function() {
     if (this._searchInProgress === false)
       this._searchInProgress = true;
+
+    this.async(function () {
+      this.$$('#asi').$.inputKeyword.focus();
+    }, 5);
   },
 
   _hideSearch: function() {
