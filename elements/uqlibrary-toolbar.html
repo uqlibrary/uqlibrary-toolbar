@@ -27,6 +27,10 @@
           color: var(--theme-color-light) !important;
         };
       }
+
+      paper-listbox {
+        width: 350px;
+      }
     </style>
     <paper-toolbar id="mainToolbar">
 
@@ -44,7 +48,7 @@
 
         <template is="dom-if" if="{{_hasAppLinks(appLinks)}}">
 
-          <paper-menu-button horizontal-align="right" vertical-align="below">
+          <paper-menu-button horizontal-offset="-310" horizontal-align="left" vertical-align="top" vertical-offset="40">
             <paper-icon-button id="actionsButton" icon="more-vert" class="dropdown-trigger" title="show more options" aria-label="show more options" alt="actions icon"></paper-icon-button>
             <paper-listbox id="listActions" on-iron-activate="_actionSelected" class="dropdown-content"
                            no-auto-focus="true" aria-label="Select action item" title="Select action item">
