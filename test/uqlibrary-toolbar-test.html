@@ -58,50 +58,11 @@
         var searchIcon = element.querySelector('#searchButton');
         expect(searchIcon).to.be.null;
 
-        // app links, not returns true even without applinks, just says the icon is there
-        var appLinksIcon = element.querySelector('#actionsButton');
-        expect(appLinksIcon).to.be.null;
-
         done();
 
       });
     });
 
-    test('should display search/app links toolbar items', function (done) {
-      flush(function () {
-
-        element.enableSearch = true;
-        element.appLinks =[{"label": "Switch back", "action": "#"}, {"label": "Help", "url": "#"}, {"label": "Feedback", "url": "#"}];
-
-        setTimeout(function () {
-
-          // menu icon
-          var menuIcon = element.querySelector('#hamburgerMenuIcon');
-          expect(menuIcon).not.to.be.null;
-          expect(menuIcon).to.be.visible;
-
-          // search icon
-          var searchIcon = element.querySelector('#searchButton');
-          expect(searchIcon).not.to.be.null;
-          expect(searchIcon).to.be.visible;
-
-          // app links, not returns true even without applinks, just says the icon is there
-          var appLinksIcon = element.querySelector('#actionsButton');
-          expect(appLinksIcon).not.to.be.null;
-          expect(appLinksIcon).to.be.visible;
-
-          // app links, not returns true even without applinks, just says the icon is there
-          var toolbarTitle = element.querySelector('.title');
-          expect(toolbarTitle).not.to.be.null;
-          expect(toolbarTitle).to.be.visible;
-          expect(toolbarTitle.innerHTML).to.equal('Application Name');
-          console.log(toolbarTitle.innerHTML);
-
-          done();
-        }, 10);
-
-      });
-    });
 
     test('should display search input when search button is tapped', function (done) {
 
