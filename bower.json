@@ -13,12 +13,12 @@
     "iron-elements": "PolymerElements/iron-elements#^1.0.8",
     "paper-elements": "PolymerElements/paper-elements#^1.0.7",
     "polymer": "Polymer/polymer#^1.4",
-    "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input#ampersand",
+    "uqlibrary-autosuggest-input": "uqlibrary/uqlibrary-autosuggest-input#v1.1.1",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.0.5",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.0"
   },
   "devDependencies": {
-    "web-component-tester": "^4.2.2",
+    "web-component-tester": "^4.3.5",
     "test-fixture": "PolymerElements/test-fixture#^1.1.0"
   },
   "ignore": []
