@@ -1,5 +1,8 @@
 # uqlibrary-toolbar
 
+[![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-toolbar.svg)](https://david-dm.org/uqlibrary/uqlibrary-toolbar)
+[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-toolbar/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-toolbar?type=dev)
+
 uqlibrary-toolbar displays a toolbar which takes an initialisation state, most fundamentally a title, but also 
 including search and more actions display
 
