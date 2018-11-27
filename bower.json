@@ -18,8 +18,10 @@
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.0"
   },
   "devDependencies": {
-    "web-component-tester": "^4.3.5",
+    "web-component-tester": "*",
     "test-fixture": "PolymerElements/test-fixture#^1.1.0"
   },
-  "ignore": []
+  "resolutions": {
+    "test-fixture": "^1.1.0"
+  }
 }
