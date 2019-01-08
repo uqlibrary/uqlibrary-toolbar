@@ -16,6 +16,8 @@ uqlibrary-toolbar displays a toolbar which takes an initialisation state, most f
 ### Getting Started
 
 ```sh
+npm install -g bower web-component-tester
+npm install
 bower install
 ```
 
@@ -23,12 +25,11 @@ bower install
 
 * Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/).
 * Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
-* GitHub pages should be updated after every commit to Master by running the "generate-gh-pages.sh" in the /bin/ directory
 
 ### Testing
 
 Tests are run using the Web Component Tester. Either navigate to /tests/index.html in a browser or using the command line:
 
 ```sh
-wct --local all
+npm test
 ```
