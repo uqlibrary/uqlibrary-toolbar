@@ -6,7 +6,7 @@
 
 uqlibrary-toolbar displays a toolbar which takes an initialisation state, most fundamentally a title, but also including search and more actions display
 
-Full documentation and demo can be found in [GitHub Pages](https://uqlibrary.github.io/uqlibrary-training/uqlibrary-training/).
+Full documentation and demo can be found in [GitHub Pages](https://uqlibrary.github.io/uqlibrary-toolbar/uqlibrary-toolbar/).
 
 ## Events
 
