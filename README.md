@@ -5,6 +5,8 @@
 
 uqlibrary-toolbar displays a toolbar which takes an initialisation state, most fundamentally a title, but also including search and more actions display
 
+Full documentation and demo can be found in [GitHub Pages](https://uqlibrary.github.io/uqlibrary-training/uqlibrary-training/).
+
 ## Events
 
 | Event type                            | Event data             | Description                                                                                   |
@@ -24,7 +26,9 @@ bower install
 ### Developing
 
 * Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/).
-* Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
+* Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles)
+* GitHub pages should be updated after every commit to `polymer1.0` branch by running `bin/generate-gh-pages.sh`
+* A preview of the component can be viewed locally by running `npm start`. Use the second URL from the command output.
 
 ### Testing
 
