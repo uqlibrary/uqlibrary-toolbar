@@ -1,5 +1,6 @@
 # uqlibrary-toolbar
 
+[![Codeship Status for uqlibrary/uqlibrary-toolbar](https://app.codeship.com/projects/64d70e20-e425-0133-076d-5e6dd4ce3e38/status?branch=polymer1.0)](https://app.codeship.com/projects/146247)
 [![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-toolbar.svg)](https://david-dm.org/uqlibrary/uqlibrary-toolbar)
 [![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-toolbar/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-toolbar?type=dev)
 
