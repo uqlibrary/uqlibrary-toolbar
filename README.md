@@ -16,7 +16,7 @@ uqlibrary-toolbar displays a toolbar which takes an initialisation state, most f
 ### Getting Started
 
 ```sh
-npm install -g bower web-component-tester
+npm install -g bower web-component-tester polymer-cli
 npm install
 bower install
 ```

@@ -1,6 +1,5 @@
-var path = require('path');
 
-var ret = {
+module.exports = {
 	'suites': ['test'],
 	'webserver': {
 		'pathMappings': []
@@ -14,5 +13,3 @@ var ret = {
 		}
 	}
 };
-
-module.exports = ret;
