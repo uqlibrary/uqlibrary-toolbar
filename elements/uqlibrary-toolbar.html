@@ -1,11 +1,16 @@
 <link rel="import" href="elements.html">
+<!--
+`<uqlibrary-toolbar>` displays a title and a search box with live suggestions when more than three characters are entered.
 
+Example:
+
+    <uqlibrary-toolbar></uqlibrary-toolbar>
+
+@demo
+-->
 <dom-module id="uqlibrary-toolbar">
   <template>
     <style is="custom-style" include="common-styles">
-      :host {
-      }
-
       uqlibrary-autosuggest-input {
         width: calc(100% - 80px);
 
