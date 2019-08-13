@@ -29,8 +29,8 @@
     "web-component-tester": "*"
   },
   "engines": {
-    "npm": "^6.5.0",
-    "node": "^11.8.0"
+    "npm": "^6",
+    "node": "11.10.1"
   },
   "engine-strict": true
 }
