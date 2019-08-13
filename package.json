@@ -1,6 +1,6 @@
 {
   "name": "uqlibrary-toolbar",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Web component to display toolbar",
   "license": "MIT",
   "main": "index.html",
